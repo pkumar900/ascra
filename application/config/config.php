@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 
-$config['base_url'] = 'http://localhost/bglooks/';
+$config['base_url'] = 'http://localhost/pradeep_test/';
 
 /*
 |--------------------------------------------------------------------------

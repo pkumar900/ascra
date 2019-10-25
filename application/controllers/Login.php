@@ -22,31 +22,41 @@ class Login extends CI_Controller {
 	{
 		$this->load->view('login/login');
 	}
-
+	
 	public function checklogin()
 	{
-		$result=$this->Login_model->login($this->input->post('username'),$this->input->post('password'));
-		if(!empty($result))
+		$this->form_validation->set_rules('username', 'Username', 'trim|required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		if($this->form_validation->run() === FALSE)
 		{
-			$session = array(
-				'status'=>'logged_in',
-				'name' =>$result[0]->name,
-				'last_name' =>$result[0]->last_name,
-				'email'=>$result[0]->email,
-				'role'=>$result[0]->role,
-				'admin_id'=>$result[0]->id,
-				'branch_id'=>$result[0]->branch_id
-				 );
-			$this->session->set_userdata($session);
-		
-			redirect('Dashboard','refresh');
-
+			$this->load->view('login/login');
 		}
 		else
 		{
-			$data['msg']='<span><strong style="color:red">Inavalid Credentials</strong></span>';
-			$this->load->view('login/login',$data);
+			$result=$this->Login_model->login($this->input->post('username'),$this->input->post('password'));
+			if(!empty($result))
+			{
+				$session = array(
+					'status'=>'logged_in',
+					'name' =>$result[0]->name,
+					'last_name' =>$result[0]->last_name,
+					'email'=>$result[0]->email,
+					'admin_id'=>$result[0]->id,
+				);
+				$this->session->set_userdata($session);
+				
+				redirect('Dashboard','refresh');
+
+			}
+			else
+			{
+
+				$data['msg']=1;
+				$this->load->view('login/login',$data);
+			}
 		}
+		
 	}
 
 	public function Logout()

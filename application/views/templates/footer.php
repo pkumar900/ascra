@@ -35,6 +35,7 @@
     <script src="<?= base_url() ?>assets/plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
     <script src="<?= base_url() ?>assets/plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
     <script src="<?= base_url() ?>assets/plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+     <script src="<?= base_url() ?>assets/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script src="<?= base_url() ?>assets/js/custom.js"></script>
 
