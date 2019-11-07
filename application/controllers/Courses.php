@@ -5,7 +5,7 @@ class Courses extends AUTH_Controller {
 
 	function __construct() { 
 		parent::__construct(); 
-		$this->load->model('Course_model'); 
+		$this->load->model(array('Course_model','School_model')); 
 
 	} 
 
@@ -14,20 +14,26 @@ class Courses extends AUTH_Controller {
 		$data['all_course']=$this->Course_model->view_course();
 		template('course/course',$data);
 	}
+ 
+	public function view($course_id)
+	{
+			$course_id=base64_decode($course_id);
+			$data['data']=$this->Course_model->view_course_view($course_id);
+			template('course/view-course',$data);
+	}
 
 	public function create()
 	{
-		template('course/add-course',$data);
+		template('course/add-course');
 	}
 
 	public function store()
 	{
 
-		$this->form_validation->set_rules('name', 'Course', 'trim|required');
-		$this->form_validation->set_error_delimiters('<p style="color:red">', '</p>');
-		if ($this->form_validation->run() === FALSE)
+	
+		if ($this->form_validation->run('course') === FALSE)
 		{
-			template('course/add-course',$data);
+			template('course/add-course');
 		} 
 		else
 		{
@@ -35,20 +41,20 @@ class Courses extends AUTH_Controller {
 			if($check)
 			{
 
-				$this->session->set_flashdata('msg', '<div class="alert alert-danger">Course Already Exists.</div>');
+				$this->session->set_flashdata('msg', '4');
 
-				template('course/add-course',$data);
+				template('course/add-course');
 			}
 			else
 				if($this->Course_model->store())
 				{
 
-					$this->session->set_flashdata('msg', '<div class="alert alert-success">Course Added successfully.</div>');
+					$this->session->set_flashdata('msg', '1');
 					redirect('Courses');
 				}
 				else
 				{
-					$this->session->set_flashdata('msg', '<div class="alert alert-danger"><strong>Oops!</strong>Something Went Wrong.</div>');
+					$this->session->set_flashdata('msg', '3');
 					redirect('Schools');
 				}
 
@@ -59,16 +65,16 @@ class Courses extends AUTH_Controller {
 		{
 			$course_id=base64_decode($course_id);
 			$data['data']=$this->Course_model->view_courseby_id($course_id);
+			$data['all_school']=$this->School_model->view_school();
+			$data['mapping']=$this->Course_model->view_mapping_id($course_id);
 			template('course/edit-course',$data);
 		}
 
 		public function update()
 		{
 
-			$this->form_validation->set_rules('name', 'School', 'trim|required');
-			$this->form_validation->set_error_delimiters('<p style="color:red">', '</p>');
 			$course_id=base64_decode($this->input->post('id'));
-			if ($this->form_validation->run() === FALSE)
+			if ($this->form_validation->run('course') === FALSE)
 			{
 				$data['data']=$this->Course_model->view_courseby_id($course_id);
 				template('course/edit-course',$data);
@@ -78,7 +84,7 @@ class Courses extends AUTH_Controller {
 				$check=$this->Custom_model->Duplicate_data('tbl_course','name',$this->input->post('name'),$course_id,'id');
 				if($check)
 				{
-					$this->session->set_flashdata('msg', '<div class="alert alert-danger">Course Already Exists.</div>');
+					$this->session->set_flashdata('msg', '4');
 
 					$data['data']=$this->Course_model->view_courseby_id($course_id);
 					template('course/edit-course',$data);
@@ -86,14 +92,14 @@ class Courses extends AUTH_Controller {
 				else
 					if($this->Course_model->update($course_id))
 					{
-						$this->session->set_flashdata('msg', '<div class="alert alert-success">Course Updated successfully.</div>');
+						$this->session->set_flashdata('msg', '2');
 
 						redirect('Courses');
 					}
 					else
 					{
 						$data['data']=$this->Course_model->view_courseby_id($course_id);
-						$this->session->set_flashdata('msg', '<div class="alert alert-danger"><strong>Oops!</strong>Something Went Wrong.</div>');
+						$this->session->set_flashdata('msg', '3');
 						template('course/edit-course',$data);
 					}
 

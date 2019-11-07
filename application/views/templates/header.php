@@ -24,6 +24,10 @@
   <!-- JQuery DataTable Css -->
   <link href="<?= base_url() ?>assets/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
+  <link href="<?= base_url() ?>assets/plugins/multi-select/css/multi-select.css" rel="stylesheet">
+  <link href="<?= base_url() ?>assets/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+
   <!-- Custom Css -->
   <link href="<?= base_url() ?>assets/css/style.css" rel="stylesheet">
   <link href="<?= base_url() ?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" />

@@ -3,7 +3,11 @@
     <div class="block-header">
       <h2>Edit School</h2>
     </div>
-     <?= $this->session->flashdata('msg'); ?>
+    <?php 
+       if($this->session->flashdata('msg')==4) {
+        echo '<div class="alert alert-danger">Already exits.</div>';
+     }
+       ?>
     <div class="row clearfix">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="card">
@@ -18,6 +22,30 @@
                     <input type="text" name="name" class="form-control" placeholder="Name" value="<?= $data[0]->name ?>" />
                   </div>
                   <?= form_error('name')?>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <!-- <div class="form-line"> -->
+                    <select class="form-control" name="course_id[]" multiple >
+                      <option value="">Select Course</option>
+                      <?php foreach ($all_course as $key => $value) { 
+                            $selected='';
+                            foreach ($mapping as $key => $value_m) {
+                              if($value->id==$value_m->course_id){
+                                $selected='selected';
+                              }
+                              
+                            }
+                        
+                        ?>
+                        <option value="<?= $value->id ?>" <?= $selected ?>><?= $value->name?></option>
+                     <?php  } ?>
+
+                    </select>
+                  <!-- </div> -->
+                   <?= form_error('course_id')?>
+                  <!-- <span></span> -->
                 </div>
               </div>
             </div>

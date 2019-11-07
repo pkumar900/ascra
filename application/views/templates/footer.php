@@ -24,6 +24,11 @@
     <!-- Custom Js -->
     <script src="<?= base_url() ?>assets/js/admin.js"></script>
     <script src="<?= base_url() ?>assets/js/pages/tables/jquery-datatable.js"></script>
+    <script src="<?= base_url() ?>assets/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+
+    <script src="<?= base_url() ?>assets/plugins/multi-select/js/jquery.multi-select.js"></script>
+
 
 
      <script src="<?= base_url() ?>assets/plugins/jquery-datatable/jquery.dataTables.js"></script>

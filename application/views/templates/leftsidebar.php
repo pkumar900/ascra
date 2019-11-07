@@ -53,27 +53,7 @@
               
             </ul>
           </li>
-         <li class="<?= ($this->uri->segment(1)=='School_to_course' || $this->uri->segment(1)=='Course_to_school')?'active':''?>">
-            <a href="javascript:void(0);" class="menu-toggle">
-              <i class="material-icons">change_history</i>
-              <span>Manage Mapping</span>
-            </a>
-            <ul class="ml-menu">
-              <li class="<?= ($this->uri->segment(1)=='School_to_course')?'active':''?>">
-                <a href="<?= base_url('School_to_course')?>">
-                  
-                  <span>School Mapping</span>
-                </a>
-              </li>
-              <li class="<?= ($this->uri->segment(1)=='Course_to_school')?'active':''?>">
-                <a href="<?= base_url('Course_to_school')?>">
-                  
-                  <span>Course Mapping</span>
-                </a>
-              </li>
-              
-            </ul>
-          </li>
+     
           
       </ul>
     </div>
